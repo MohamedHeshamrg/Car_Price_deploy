@@ -4,4 +4,4 @@ matplotlib
 scikit-learn
 jupyter
 plotly
-request
+
