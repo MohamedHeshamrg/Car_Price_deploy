@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import pickle
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OrdinalEncoder
 
 @st.cache_data
 def load_data():
