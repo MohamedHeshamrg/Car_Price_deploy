@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import pickle
+
 from sklearn.base import BaseEstimator, TransformerMixin
 
 class FrequencyEncoder(BaseEstimator, TransformerMixin):
@@ -35,8 +37,8 @@ def load_data():
 df = load_data()
 
 
-pipeline = joblib.load("pages/car_price_stacking_ML_model.h5")
 
+pipeline = pickle.load(open('pages/car_price_stacking_ML_model.h5', 'rb'))
 
 # الأعمدة المطلوبة في الـ input
 inputs = ['brand', 'model', 'model_year', 'body', 'transmission', 'state',
