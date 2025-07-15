@@ -20,18 +20,11 @@ class FrequencyEncoder(BaseEstimator, TransformerMixin):
 
 
 @st.cache_data
-def load_data():
-    base_url = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/data/"
-    df1 = pd.read_csv(base_url + "part1.csv")
-    df2 = pd.read_csv(base_url + "part2.csv")
-    df3 = pd.read_csv(base_url + "part3.csv")
-    df4 = pd.read_csv(base_url + "part4.csv")
-    df5 = pd.read_csv(base_url + "part5.csv")
-    df6 = pd.read_csv(base_url + "part6.csv")
-    df = pd.concat([df1, df2, df3, df4, df5, df6], ignore_index=True)
-    return df
 
-df = load_data()
+base_url = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/data/"
+df = pd.concat([
+    pd.read_csv(base_url + f"part{i}.csv") for i in range(1, 7)
+], ignore_index=True)
 
 # -------------------- 3. تحميل الموديل --------------------
 with open('pages/stacking_model_backup.pkl', 'rb') as f:
