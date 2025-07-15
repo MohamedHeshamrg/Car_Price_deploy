@@ -545,7 +545,7 @@ with tab3:
         st.plotly_chart(fig, use_container_width=True)
 
         # Condition Impact on Price within Top Brands
-        top_makes = ['Nissan', 'Ford', 'Chevrolet', 'Toyota', 'BMW','Lexus']
+        top_makes = ['nissan', 'ford', 'chevrolet', 'toyota', 'bmw','lexus']
 
         condition_price_impact = df[df['brand'].isin(top_makes)].groupby(['brand', 'condition'])['sellingprice'].mean().unstack()
 
