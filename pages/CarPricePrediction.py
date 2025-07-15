@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import pickle
 from sklearn.base import BaseEstimator, TransformerMixin
-
 class FrequencyEncoder(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         self.freq_maps = {
@@ -19,34 +18,27 @@ class FrequencyEncoder(BaseEstimator, TransformerMixin):
             X[col] = X[col].map(self.freq_maps[col]).fillna(0)
         return X
 
+
 @st.cache_data
 def load_data():
     base_url = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/data/"
-    
     df1 = pd.read_csv(base_url + "part1.csv")
     df2 = pd.read_csv(base_url + "part2.csv")
     df3 = pd.read_csv(base_url + "part3.csv")
     df4 = pd.read_csv(base_url + "part4.csv")
     df5 = pd.read_csv(base_url + "part5.csv")
     df6 = pd.read_csv(base_url + "part6.csv")
-    df = pd.concat([df1, df2, df3, df4,df5,df6], ignore_index=True)
+    df = pd.concat([df1, df2, df3, df4, df5, df6], ignore_index=True)
     return df
 
 df = load_data()
 
+# -------------------- 3. تحميل الموديل --------------------
 with open('pages/stacking_model_backup.pkl', 'rb') as f:
     pipeline = pickle.load(f)
 
-df['motor_mi'] = np.log1p(df['motor_mi'])
-df.drop(['seller','saledate','market_advantage','sell_month_name','sell_day_name','sell_hour','trim', 'season','mmr'],axis = 1 , inplace = True)
-# Condition Values change from 0 to 50 --> 1 to 5 
-df['condition'] = pd.cut(df['condition'], bins=[0, 10, 20, 30, 40, 50], labels=[1, 2, 3, 4, 5])
-df['condition'] = df['condition'].astype(int)
 
-x = df.drop('sellingprice', axis = 1)
-y = df['sellingprice']
 
-# StackingRegressor Final Model
 
 # ------------ Column Division ------------
 freq_cols = ['brand', 'model', 'body', 'state', 'color', 'interior', 'time_period']
