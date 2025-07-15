@@ -2,9 +2,8 @@ numpy
 pandas
 matplotlib
 plotly
-
 scikit-learn
 category-encoders
 xgboost
 lightgbm
-
+pickle
