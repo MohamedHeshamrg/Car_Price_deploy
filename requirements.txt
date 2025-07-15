@@ -1,10 +1,10 @@
 numpy
 pandas
 matplotlib
-
 plotly
 joblib
-scikit-learn
+scikit-learn==1.0.1
 category-encoders
 xgboost
 lightgbm
+pickle-mixin==1.0.2
