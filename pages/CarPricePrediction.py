@@ -12,6 +12,7 @@ from sklearn.model_selection import cross_validate
 from xgboost import XGBRegressor
 from sklearn.ensemble import StackingRegressor
 from sklearn.compose import ColumnTransformer
+from category_encoders import BinaryEncoder
 
 
 from sklearn.base import BaseEstimator, TransformerMixin
