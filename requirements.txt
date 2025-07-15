@@ -3,7 +3,7 @@ pandas
 matplotlib
 plotly
 joblib
-scikit-learn==1.0.1
+scikit-learn
 category-encoders
 xgboost
 lightgbm
