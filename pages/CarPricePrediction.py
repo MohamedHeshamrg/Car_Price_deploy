@@ -3,17 +3,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import  RobustScaler
-from lightgbm import LGBMRegressor
-from sklearn.linear_model import Ridge , Lasso
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import cross_validate
-from xgboost import XGBRegressor
-from sklearn.ensemble import StackingRegressor
-from sklearn.compose import ColumnTransformer
-from category_encoders import BinaryEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
 
 class FrequencyEncoder(BaseEstimator, TransformerMixin):
