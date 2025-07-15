@@ -38,7 +38,7 @@ df = load_data()
 
 
 
-pipeline = pickle.load(open('pages/car_price_stacking_ML_model.h5', 'rb'))
+pipeline = pickle.load(open('pages/stacking_model_backup.sav', 'rb'))
 
 # الأعمدة المطلوبة في الـ input
 inputs = ['brand', 'model', 'model_year', 'body', 'transmission', 'state',
