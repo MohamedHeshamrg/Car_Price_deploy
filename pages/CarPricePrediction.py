@@ -35,7 +35,7 @@ def load_data():
 df = load_data()
 
 
-pipeline = joblib.load("pages/car_price_stacking_ML_model.pkl")
+pipeline = joblib.load("pages/car_price_stacking_ML_model.h5")
 
 
 # الأعمدة المطلوبة في الـ input
