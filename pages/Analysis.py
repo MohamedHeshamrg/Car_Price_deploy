@@ -7,12 +7,6 @@ import numpy as np
 import plotly.graph_objects as go
 from scipy.stats import gaussian_kde
 
-import sys
-sys.path.append("H:/Final project/Deployment")
-
-from UI import *
-
-
 
 st.set_page_config(page_title="Explatory Data Analysis", page_icon="📈", layout="wide")
 
@@ -40,9 +34,26 @@ def heading():
 
 heading()
 
-# تطبيق التنسيق من CSS خارجي
-with open('H:/Final project/Deployment/Style.css') as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+st.markdown("""
+    <style>
+    [data-testid=metric-container] {
+        box-shadow: 0 0 4px #cccccc;
+        padding: 10px;
+    }
+
+    .plot-container > div {
+        box-shadow: 0 0 4px #cccccc;
+        padding: 10px;
+    }
+
+    div[data-testid="stExpander"] div[role="button"] p {
+        font-size: 1.3rem;
+        color: rgb(71, 146, 161);
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 
 st.markdown("##")
 
@@ -53,10 +64,13 @@ tab1, tab2 ,tab3 = st.tabs(['📊🟦 Categorical Analysis','📈🟧 Numerical 
 # Reading parts
 @st.cache_data
 def load_data():
-    df1 = pd.read_csv('H:/Final project/Data/Data cleaned/part1.csv')
-    df2 = pd.read_csv('H:/Final project/Data/Data cleaned/part2.csv')
-    df3 = pd.read_csv('H:/Final project/Data/Data cleaned/part3.csv')
-    df4 = pd.read_csv('H:/Final project/Data/Data cleaned/part4.csv')
+    base_url = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/Data/Data%20cleaned/"
+    
+    df1 = pd.read_csv(base_url + "part1.csv")
+    df2 = pd.read_csv(base_url + "part2.csv")
+    df3 = pd.read_csv(base_url + "part3.csv")
+    df4 = pd.read_csv(base_url + "part4.csv")
+    
     return pd.concat([df1, df2, df3, df4], ignore_index=True)
 
 df = load_data()
