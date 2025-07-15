@@ -34,7 +34,7 @@ def load_data():
 
 df = load_data()
 
-with open('stacking_model_backup.pkl', 'rb') as f:
+with open('pages/stacking_model_backup.pkl', 'rb') as f:
     pipeline = pickle.load(f)
 
 df['motor_mi'] = np.log1p(df['motor_mi'])
