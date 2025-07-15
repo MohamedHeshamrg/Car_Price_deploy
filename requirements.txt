@@ -6,3 +6,4 @@ jupyter
 plotly
 joblib
 imbalanced-learn
+sklearn.utils
