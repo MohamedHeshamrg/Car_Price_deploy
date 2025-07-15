@@ -1,9 +1,9 @@
 numpy
 pandas
 matplotlib
-scikit-learn
 jupyter
 plotly
 joblib
-imbalanced-learn
+scikit-learn==1.2.2
+imbalanced-learn==0.10.1
 sklearn.utils
