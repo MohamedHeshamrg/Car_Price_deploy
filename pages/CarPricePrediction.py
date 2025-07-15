@@ -2,40 +2,12 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
-import sys
-import requests
-import tempfile
 import joblib
-import importlib.util
-
+from frequency_encoder import FrequencyEncoder 
 # تحميل ملف frequency_encoder.py من GitHub
-url_encoder = "https://raw.githubusercontent.comMohamedHeshamrg/Car_Price/main/frequency_encoder.py"
-response = requests.get(url_encoder)
-response.raise_for_status()
 
-# حفظ الملف مؤقتًا
-with tempfile.NamedTemporaryFile(suffix=".py", delete=False) as tmp_encoder:
-    tmp_encoder.write(response.content)
-    encoder_path = tmp_encoder.name
 
-# استيراد FrequencyEncoder ديناميكياً
-spec = importlib.util.spec_from_file_location("frequency_encoder", encoder_path)
-freq_module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(freq_module)
-FrequencyEncoder = freq_module.FrequencyEncoder
-
-# تحميل ملف الموديل h5 من GitHub
-url_model = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/car_price_stacking_ML_model.h5"
-response = requests.get(url_model)
-response.raise_for_status()
-
-# حفظ ملف h5 مؤقتًا وتحميله
-with tempfile.NamedTemporaryFile(suffix=".h5", delete=False) as tmp_model:
-    tmp_model.write(response.content)
-    model_path = tmp_model.name
-
-pipeline = joblib.load(model_path)
+pipeline = joblib.load("car_price_stacking_ML_model.pkl")
 
 
 # الأعمدة المطلوبة في الـ input
