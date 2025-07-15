@@ -29,7 +29,8 @@ def load_data():
     df4 = pd.read_csv(base_url + "part4.csv")
     df5 = pd.read_csv(base_url + "part5.csv")
     df6 = pd.read_csv(base_url + "part6.csv")
-    return pd.concat([df1, df2, df3, df4,df5,df6], ignore_index=True)
+    df = pd.concat([df1, df2, df3, df4,df5,df6], ignore_index=True)
+    return df
 
 df = load_data()
 
