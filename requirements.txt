@@ -2,9 +2,9 @@ numpy
 pandas
 matplotlib
 plotly
-joblib
+
 scikit-learn
 category-encoders
 xgboost
 lightgbm
-pickle-mixin==1.0.2
+
