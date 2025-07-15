@@ -19,6 +19,19 @@ class FrequencyEncoder(BaseEstimator, TransformerMixin):
             X[col] = X[col].map(self.freq_maps[col]).fillna(0)
         return X
 
+@st.cache_data
+def load_data():
+    base_url = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/data/"
+    
+    df1 = pd.read_csv(base_url + "part1.csv")
+    df2 = pd.read_csv(base_url + "part2.csv")
+    df3 = pd.read_csv(base_url + "part3.csv")
+    df4 = pd.read_csv(base_url + "part4.csv")
+    df5 = pd.read_csv(base_url + "part5.csv")
+    df6 = pd.read_csv(base_url + "part6.csv")
+    return pd.concat([df1, df2, df3, df4,df5,df6], ignore_index=True)
+
+df = load_data()
 
 
 pipeline = joblib.load("car_price_stacking_ML_model.pkl")
