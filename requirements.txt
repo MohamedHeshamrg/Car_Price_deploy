@@ -1,9 +1,10 @@
 numpy
 pandas
 matplotlib
-jupyter
+
 plotly
 joblib
 scikit-learn
-imbalanced-learn
-sklearn.utils
+category-encoders
+xgboost
+lightgbm
