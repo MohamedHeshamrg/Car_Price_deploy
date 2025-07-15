@@ -6,4 +6,5 @@ scikit-learn
 category-encoders
 xgboost
 lightgbm
+streamlit
 
