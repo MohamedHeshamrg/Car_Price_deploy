@@ -65,7 +65,7 @@ st.markdown("""
 # Reading parts
 @st.cache_data
 def load_data():
-    base_url = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/data"
+    base_url = "https://raw.githubusercontent.com/MohamedHeshamrg/Car_Price/main/data/"
     
     df1 = pd.read_csv(base_url + "part1.csv")
     df2 = pd.read_csv(base_url + "part2.csv")
