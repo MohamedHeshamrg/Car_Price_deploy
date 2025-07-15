@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import pickle
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import  RobustScaler
 from lightgbm import LGBMRegressor
@@ -13,8 +14,6 @@ from xgboost import XGBRegressor
 from sklearn.ensemble import StackingRegressor
 from sklearn.compose import ColumnTransformer
 from category_encoders import BinaryEncoder
-
-
 from sklearn.base import BaseEstimator, TransformerMixin
 
 class FrequencyEncoder(BaseEstimator, TransformerMixin):
@@ -46,6 +45,9 @@ def load_data():
 
 df = load_data()
 
+
+pipeline = pickle.load(open('stacking_model_backup.pkl', 'rb'))
+
 df['motor_mi'] = np.log1p(df['motor_mi'])
 df.drop(['seller','saledate','market_advantage','sell_month_name','sell_day_name','sell_hour','trim', 'season','mmr'],axis = 1 , inplace = True)
 # Condition Values change from 0 to 50 --> 1 to 5 
@@ -61,96 +63,6 @@ y = df['sellingprice']
 freq_cols = ['brand', 'model', 'body', 'state', 'color', 'interior', 'time_period']
 binary_cols = ['transmission']
 scale_cols = ['motor_mi', 'condition', 'model_year','sell_year', 'sell_month', 'sell_day']
-from sklearn.linear_model import Ridge, Lasso
-
-
-
-# ------------ ColumnTransformer ------------
-preprocessor = ColumnTransformer(transformers=[
-    ('freq_enc', Pipeline([
-        ('freq', FrequencyEncoder()),
-        ('scale', RobustScaler())
-    ]), freq_cols),
-    ('binary_enc', BinaryEncoder(), binary_cols),
-    ('num_scaler', RobustScaler(), scale_cols)
-], remainder='passthrough')
-
-# ------------ Base Models ------------
-xgb = XGBRegressor(
-        n_estimators=200,
-        max_depth=10,
-        learning_rate=0.1,
-        subsample=0.8,
-        objective='reg:squarederror',
-        random_state=42,
-        n_jobs=-1,
-        verbosity=0,
-        reg_alpha=0.5,
-        reg_lambda=1.0
-
-)
-
-lgbm = LGBMRegressor(
-        n_estimators=200,
-        max_depth=-1,
-        learning_rate=0.2,
-        subsample=0.8,
-        colsample_bytree=1.0,
-        random_state=42,
-        n_jobs=-1,
-        verbose=-1,
-
-)
-
-
-
-# ------------ Stacking Regressor ------------
-
-ridge_base = Ridge(alpha=0.5)
-lasso_base = Lasso(alpha=0.01)
-
-stacking_model = StackingRegressor(
-    estimators=[
-        ('xgb', xgb),
-        ('lgbm', lgbm),
-        ('ridge', ridge_base),
-        ('lasso', lasso_base)
-    ],
-    final_estimator=Ridge(alpha=1.0),
-    n_jobs=-1,
-    passthrough=False
-)
-# ------------ Final Pipeline ------------
-pipeline = Pipeline([
-    ('preprocessor', preprocessor),
-    ('model', stacking_model)
-])
-
-
-
-scores = cross_validate(
-    pipeline, x, np.log1p(y),  #  log target
-    cv=5,
-    scoring=['r2', 'neg_mean_squared_error', 'neg_mean_absolute_error'],
-    return_train_score=True
-)
-pipeline.fit(x, np.log1p(y))
-
-
-# ------------ Display Results ------------
-
-#Train R2: 0.9407939891644069
-#Test R2: 0.919289751986786
-#-------------------------
-#Train MSE: 0.044501419409624786
-#Test MSE: 0.06037161924907719
-#-------------------------
-#Train MAE: 0.14507140552622427
-#Test MAE: 0.16628192948228704
-#==================================================
-#Run Time: 376.3431479999999
-
-
 
 
 # الأعمدة المطلوبة في الـ input
