@@ -34,8 +34,9 @@ def load_data():
 
 df = load_data()
 
+with open('stacking_model_backup.pkl', 'wb') as f:
+    pickle.dump(pipeline, f)
 
-pipeline = pickle.load(open('stacking_model_backup.pkl', 'rb'))
 
 df['motor_mi'] = np.log1p(df['motor_mi'])
 df.drop(['seller','saledate','market_advantage','sell_month_name','sell_day_name','sell_hour','trim', 'season','mmr'],axis = 1 , inplace = True)
