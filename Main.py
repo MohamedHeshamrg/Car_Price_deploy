@@ -177,7 +177,7 @@ def Graphs():
    with st.container():
       col1, col2 = st.columns([4,3])
         # Condition Impact on Price within Top Brands
-      top_makes = ['Nissan', 'Ford', 'Chevrolet', 'Toyota', 'BMW','Lexus']
+      top_makes = ['nissan', 'ford', 'chevrolet', 'toyota', 'bmw','lexus']
 
       condition_price_impact = df[df['brand'].isin(top_makes)].groupby(['brand', 'condition'])['sellingprice'].mean().unstack()
 
