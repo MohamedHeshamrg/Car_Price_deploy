@@ -15,7 +15,7 @@ def load_data():
 df = load_data()
 
 # -------------------- 3. تحميل الموديل --------------------
-with open('pages/stacking_model_backup.pkl', 'rb') as f:
+with open('pages/stacking_model_clean.pkl', 'rb') as f:
     pipeline = pickle.load(f)
 
 
