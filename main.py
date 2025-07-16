@@ -231,5 +231,13 @@ text-align: center;
 """
 st.markdown(footer,unsafe_allow_html=True)
 
+import os
+import streamlit.web.cli as stcli
+import sys
+
+if __name__ == "__main__":
+    port = os.environ.get("PORT", 8501)
+    sys.argv = ["streamlit", "run", "main.py", "--server.port", str(port)]
+    sys.exit(stcli.main())
 
 
