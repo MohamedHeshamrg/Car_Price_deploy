@@ -16,7 +16,7 @@ df = load_data()
 
 import joblib
 
-pipeline = joblib.load('pages/stacking_model_backup.joblib')
+pipeline = joblib.load('pages/stacking_model_backup.h5')
 
 
 
