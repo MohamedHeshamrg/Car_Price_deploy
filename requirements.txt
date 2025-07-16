@@ -6,5 +6,5 @@ scikit-learn
 category-encoders
 xgboost
 lightgbm
-scikit-learn==1.2.2
+scikit-learn==1.4.2
 
