@@ -16,7 +16,7 @@ df = load_data()
 
 import joblib
 
-pipeline = joblib.load('xgb_model.joblib')
+pipeline = joblib.load('pages/xgb_model.joblib')
 
 
 
